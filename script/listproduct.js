@@ -11,7 +11,6 @@ window.onload = function ()
 
             for (let i = 0; i < response.length; i++)
             {
-                console.log(response[i].imageUrl);
                 element.innerHTML +=
                 "<div class='row justify-content-center'>" +
                     "<div class='col-12 col-lg-6'>" +
