@@ -7,7 +7,7 @@ window.onload = function ()
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) 
         {
             let response = JSON.parse(this.responseText);
-           let element = document.getElementById("product");
+            let element = document.getElementById("product");
                 element.innerHTML =
                 "<div class='row justify-content-center'>" +
                     "<div class='col-12 col-lg-6'>" +
@@ -16,7 +16,7 @@ window.onload = function ()
                                 "<h2 class='card-title'>"+ response.name +"</h2>" +
                                 "<p class='card-text'>"+ response.price +" Euros</p>" + 
                                 "<img width='40' height='30' alt='vintage chair' src='"+ response.imageUrl + "'>" +
-                                "<a href='' class='btn btn-dark'>Voir le détail du produit 1</a>" +
+                                "<a href='pages/panier.html' class='btn btn-dark'>Ajouter au panier</a>" +
                             "</div>" +
                          "</div>" +
                     "</div>" +
