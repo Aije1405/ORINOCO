@@ -19,7 +19,7 @@ window.onload = function ()
                                 "<h2 class='card-title'>"+ response[i].name +"</h2>" +
                                 "<p class='card-text'>"+ response[i].price +" Euros</p>" + 
                                 "<img width='40' height='30' alt='vintage chair' src='"+ response[i].imageUrl + "'>" +
-                                "<a href='pages/produit.html?id="+response[i]._id+"' class='btn btn-dark'>Voir le détail du produit 1</a>" +
+                                "<a href='pages/product.html?id="+response[i]._id+"' class='btn btn-dark'>Voir le détail du produit 1</a>" +
                             "</div>" +
                          "</div>" +
                     "</div>" +

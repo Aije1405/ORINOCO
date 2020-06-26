@@ -1,3 +1,8 @@
+function callApi(request, ID) {
+    request.open("GET", "http://localhost:3000/api/furniture/" + ID);
+    request.send();
+}
+
 window.onload = function () 
 {
     let request = new XMLHttpRequest();
@@ -16,7 +21,7 @@ window.onload = function ()
                                 "<h2 class='card-title'>"+ response.name +"</h2>" +
                                 "<p class='card-text'>"+ response.price +" Euros</p>" + 
                                 "<img width='40' height='30' alt='vintage chair' src='"+ response.imageUrl + "'>" +
-                                "<a href='pages/panier.html' class='btn btn-dark'>Ajouter au panier</a>" +
+                                "<a href='../pages/panier.html' class='btn btn-dark'>Ajouter au panier</a>" +
                             "</div>" +
                          "</div>" +
                     "</div>" +
@@ -31,8 +36,7 @@ window.onload = function ()
     const URLPARAMETERS = new URLSearchParams(QUERYSTRING);
     const ID = URLPARAMETERS.get('id');
 
-    request.open("GET", "http://localhost:3000/api/furniture/" + ID);
-    request.send();
-
-
+    callApi(request, ID);
 }
+
+
