@@ -21,11 +21,7 @@ window.onload = function ()
                                 "<h2 class='card-title'>"+ response.name +"</h2>" +
                                 "<p class='card-text'>"+ response.price +" Euros</p>" + 
                                 "<img width='40' height='30' alt='vintage chair' src='"+ response.imageUrl + "'>" +
-<<<<<<< HEAD
                                 "<a href='../pages/panier.html' class='btn btn-dark'>Ajouter au panier</a>" +
-=======
-                                "<a href='pages/panier.html' class='btn btn-dark'>Ajouter au panier</a>" +
->>>>>>> Staging
                             "</div>" +
                          "</div>" +
                     "</div>" +
