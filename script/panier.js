@@ -2,6 +2,7 @@ window.onload = function ()
 {
     let panier = JSON.parse(localStorage.getItem("panier"));
     let element = document.getElementById("affichePanier");
+
     for (let i = 0; i < panier.length; i++){
         element.innerHTML +=
         `<tr>` + 
@@ -10,9 +11,6 @@ window.onload = function ()
         `<td>${panier[i].price} euros</td>` +
         `</tr>`;
     }
-    
-
-    
 
 }
 
