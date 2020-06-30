@@ -1,29 +1,30 @@
 window.onload = function () 
 {
-    const REQUEST = new XMLHttpRequest();
-    const METHOD = "GET";
-    const URL = "http://localhost:3000/api/furniture/id"
-
-    REQUEST.open(METHOD, URL);
-
-    REQUEST.onreadystatechange = function (event){
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) 
-        {
-            let ajoutPanier = JSON.parse(this.responseText);
-            
-        }
-        REQUEST.send();
+    let panier = JSON.parse(localStorage.getItem("panier"));
+    let element = document.getElementById("affichePanier");
+    for (let i = 0; i < panier.length; i++){
+        element.innerHTML +=
+        `<tr>` + 
+        `<td><img src='${panier[i].imageUrl}' alt='' width="50" ></td>` + 
+        `<td>${panier[i].name}</td>` + 
+        `<td>${panier[i].price} euros</td>` +
+        `</tr>`;
     }
+    
 
-    function ajoutPanier(imageUrl, name, price){
-        const nouvelArticlePanier = document.createElement("th");
-        nouvelArticlePanier.innerHTML = `<img>${imageUrl}</img><h3>${name}<h3/><p>${price}</p>`
-        document.querySelector("thead").appendChild(nouvelArticlePanier);
-    }
+    
 
-    ajoutPanier
 }
 
+
+
+
+/*
+<tr>
+<td><img src="" alt=""></td>
+<td>Nom</td>
+ <td>190 euros</td>
+ </tr>*/
 
 //FONCTION POUR CREER LE PANIER ?
 //<ul> dans le HTML, puis

@@ -3,11 +3,11 @@ function callApi(request, ID) {
     request.send();
 }
 
-//
-function ajoutPanier(id, imageUrl, name, price) {
-    let panier = JSON.parse(localStorage.getItem("panier")); //je vérifie si mon panier existe
 
-    if (panier === null) {
+function ajoutPanier(id, imageUrl, name, price) {
+    let panier = JSON.parse(localStorage.getItem("panier")); //
+    console.log(panier);
+    if (panier === null) { //je vérifie si mon panier existe
         panier = [];
     }
 
@@ -18,7 +18,9 @@ function ajoutPanier(id, imageUrl, name, price) {
         price: price
     });
 
-    localStorage.setItem("panier", JSON.stringify(panier));
+    localStorage.setItem("panier", JSON.stringify(panier)); //les paramètres ne peuvent être que des strings donc JSON
+    
+    //document.createElement("tbody").appendChild(panier); création du tableau panier
 }
 
 window.onload = function () {
