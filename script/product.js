@@ -19,8 +19,12 @@ function ajoutPanier(id, imageUrl, name, price) {
     });
 
     localStorage.setItem("panier", JSON.stringify(panier)); //les paramètres ne peuvent être que des strings donc JSON
-    
-    //document.createElement("tbody").appendChild(panier); création du tableau panier
+
+}
+
+function Message(){
+   alert("Votre article a bien été ajouté au panier");
+   console.log(alert);
 }
 
 window.onload = function () {
@@ -38,8 +42,8 @@ window.onload = function () {
                 "<div class='card-body'>" +
                 `<h2 class='card-title'>${response.name}</h2>` +
                 `<p class='card-text'>${response.price} Euros</p>` +
-                `<img width='40' height='30' alt='vintage chair' src="${response.imageUrl}">` +
-                `<button onclick="ajoutPanier('${response._id}','${response.imageUrl}', '${response.name}', ${response.price})" class='btn btn-dark'>Ajouter au panier</button>` +
+                `<img width='40' height='30' alt='furniture' src="${response.imageUrl}">` +
+                `<button onclick="ajoutPanier('${response._id}','${response.imageUrl}', '${response.name}', ${response.price})" , "Message()" class='btn btn-dark'>Ajouter au panier</button>` +
                 "</div>" +
                 "</div>" +
                 "</div>" +
