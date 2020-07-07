@@ -2,6 +2,7 @@ window.onload = function ()
 {
     let panier = JSON.parse(localStorage.getItem("panier"));
     let element = document.getElementById("affichePanier");
+    let totalPanier = 0;
 
     for (let i = 0; i < panier.length; i++){
         element.innerHTML +=
@@ -10,9 +11,27 @@ window.onload = function ()
         `<td>${panier[i].name}</td>` + 
         `<td>${panier[i].price} euros</td>` +
         `</tr>`;
+        totalPanier += panier[i].price;
     }
 
+    element.innerHTML +=
+        `<th>TOTAL TTC</th>` + `<th></th>` + `<th>${totalPanier}</th>`;
+
 }
+     
+/*
+if(panier.length < i){
+    document.getElementById("formContact").style.display = "none"
+} else {
+    
+}
+*/
+
+
+
+
+
+
 
 //CONDITION AFFICHAGE FORM
 /*
@@ -21,7 +40,7 @@ function afficheForm (){
     SI (panier < 1) {
         document.getElementById("affichePanier").style.display = "none";
     } else {
-        
+
     }
 }
 

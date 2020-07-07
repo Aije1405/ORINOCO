@@ -19,7 +19,7 @@ function ajoutPanier(id, imageUrl, name, price) {
     });
 
     localStorage.setItem("panier", JSON.stringify(panier)); //les paramètres ne peuvent être que des strings donc JSON
-
+    Message();
 }
 
 function Message(){
@@ -43,7 +43,7 @@ window.onload = function () {
                 `<h2 class='card-title'>${response.name}</h2>` +
                 `<p class='card-text'>${response.price} Euros</p>` +
                 `<img width='40' height='30' alt='furniture' src="${response.imageUrl}">` +
-                `<button onclick="ajoutPanier('${response._id}','${response.imageUrl}', '${response.name}', ${response.price})" , "Message()" class='btn btn-dark'>Ajouter au panier</button>` +
+                `<button onclick="ajoutPanier('${response._id}','${response.imageUrl}', '${response.name}', ${response.price})" ,class='btn btn-dark'>Ajouter au panier</button>` +
                 "</div>" +
                 "</div>" +
                 "</div>" +
