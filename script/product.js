@@ -3,7 +3,7 @@ function callApi(request, ID) {
     request.send();
 }
 
-
+//Ajout Panier
 function ajoutPanier(id, imageUrl, name, price) {
     let panier = JSON.parse(localStorage.getItem("panier")); //
     console.log(panier);
@@ -21,7 +21,7 @@ function ajoutPanier(id, imageUrl, name, price) {
     localStorage.setItem("panier", JSON.stringify(panier)); //les paramètres ne peuvent être que des strings donc JSON
     Message();
 }
-
+//Un message de type "alert"vs'affiche à chaque article ajouté au panier
 function Message(){
    alert("Votre article a bien été ajouté au panier");
    console.log(alert);
@@ -33,34 +33,29 @@ window.onload = function () {
     request.onreadystatechange = function () {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             let response = JSON.parse(this.responseText);
-
             let element = document.getElementById("product");
+            //let varnish,[i] = varnish;
+
             element.innerHTML =
                 "<div class='row justify-content-center'>" +
                 "<div class='col-12 col-lg-6'>" +
                 "<div class='card my-5'>" +
                 "<div class='card-body'>" +
                 `<h2 class='card-title'>${response.name}</h2>` + `<img width='100' height='100' alt='furniture' src="${response.imageUrl}">` + 
-                `<p class='card-text'>${response.description}</p>` +
-
-                /*
-                for (let i = 0; i < response.length; i++){
-                    element.innerHTML +=
-                    `<label>Sélectionnez votre finition</label>
+                `<p class='card-text'>${response.description}</p>`+
+                `<label>Sélectionnez votre finition</label>
                     <select class="form-control">
-                      <option>${response[i].varnish}</option>
-                    </select>`
-                }
-                */
-                
+                      <option>${response.varnish}</option>
+                    </select>` +
                 `<p class='card-text'>${response.price} Euros</p>` +
                 `<button onclick="ajoutPanier('${response._id}','${response.imageUrl}', '${response.name}', ${response.price})" class='btn btn-dark'>Ajouter au panier</button>` +
                 "</div>" +
                 "</div>" +
                 "</div>" +
                 "</div>";
-
         }
+
+        
 
     }
 
