@@ -21,10 +21,15 @@ function ajoutPanier(id, imageUrl, name, price) {
     localStorage.setItem("panier", JSON.stringify(panier)); //les paramètres ne peuvent être que des strings donc JSON
     Message();
 }
-//Un message de type "alert"vs'affiche à chaque article ajouté au panier
+//Un message de type "alert" s'affiche à chaque article ajouté au panier
 function Message(){
    alert("Votre article a bien été ajouté au panier");
    console.log(alert);
+}
+
+//Afficher le nombre d'articles dans le panier
+function affichageBadge(){
+
 }
 
 window.onload = function () {
@@ -35,6 +40,7 @@ window.onload = function () {
             let response = JSON.parse(this.responseText);
             let element = document.getElementById("product");
             //let varnish = varnish;
+            //let badge = document.getElementById("affichageBadge");
 
             element.innerHTML =
                 "<div class='row justify-content-center'>" +
@@ -43,16 +49,18 @@ window.onload = function () {
                 "<div class='card-body'>" +
                 `<h2 class='card-title'>${response.name}</h2>` + `<img width='100' height='100' alt='furniture' src="${response.imageUrl}">` + 
                 `<p class='card-text'>${response.description}</p>`+
-                `<label>Sélectionnez votre finition</label>
+                `<label><em>Sélectionnez votre finition</em></label>
                     <select class="form-control">
                       <option>${response.varnish}</option>
                     </select>` +
-                `<p class='card-text'>${response.price} Euros</p>` +
+                `<p class='card-text my-2'>${response.price} Euros</p>` +
                 `<button onclick="ajoutPanier('${response._id}','${response.imageUrl}', '${response.name}', ${response.price})" class='btn btn-dark'>Ajouter au panier</button>` +
                 "</div>" +
                 "</div>" +
                 "</div>" +
                 "</div>";
+
+            //badge.text
         }
 
         

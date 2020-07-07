@@ -4,6 +4,8 @@ window.onload = function ()
     let element = document.getElementById("affichePanier");
     let totalPanier = 0;
     let form = document.getElementById("formContact");
+    
+
 
     for (let i = 0; i < panier.length; i++){
         element.innerHTML +=
@@ -58,36 +60,6 @@ window.onload = function ()
     </div>`
 }
     
-    
-    
-     
-/*
-if(panier.length < i){
-    document.getElementById("formContact").style.display = "none"
-} else {
-    
-}
-*/
-
-
-
-
-
-
-
-//CONDITION AFFICHAGE FORM
-/*
-function afficheForm (){
-
-    SI (panier < 1) {
-        document.getElementById("affichePanier").style.display = "none";
-    } else {
-
-    }
-}
-
-
-
 
 //ouverture et envoi requête POST
 /*

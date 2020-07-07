@@ -20,7 +20,7 @@ window.onload = function ()
                                 "<h2 class='card-title'>"+ response[i].name +"</h2>" +
                                 "<p class='card-text'>"+ response[i].price +" Euros</p>" + 
                                 "<a href='pages/product.html?id="+response[i]._id +
-                                "' class='btn btn-dark'>Voir le détail du produit 1</a>" +
+                                "' class='btn btn-dark'>Voir le détail du produit</a>" +
                             "</div>" +
                          "</div>" +
                     "</div>" +
@@ -35,3 +35,7 @@ window.onload = function ()
 
 
 }
+
+//const number = 123456.789;
+//console.log(new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(number));
+// expected output: "123.456,79 €"
