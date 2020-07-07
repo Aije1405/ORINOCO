@@ -34,7 +34,7 @@ window.onload = function () {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             let response = JSON.parse(this.responseText);
             let element = document.getElementById("product");
-            //let varnish,[i] = varnish;
+            //let varnish = varnish;
 
             element.innerHTML =
                 "<div class='row justify-content-center'>" +
