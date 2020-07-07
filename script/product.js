@@ -40,10 +40,21 @@ window.onload = function () {
                 "<div class='col-12 col-lg-6'>" +
                 "<div class='card my-5'>" +
                 "<div class='card-body'>" +
-                `<h2 class='card-title'>${response.name}</h2>` +
+                `<h2 class='card-title'>${response.name}</h2>` + `<img width='100' height='100' alt='furniture' src="${response.imageUrl}">` + 
+                `<p class='card-text'>${response.description}</p>` +
+
+                /*
+                for (let i = 0; i < response.length; i++){
+                    element.innerHTML +=
+                    `<label>Sélectionnez votre finition</label>
+                    <select class="form-control">
+                      <option>${response[i].varnish}</option>
+                    </select>`
+                }
+                */
+                
                 `<p class='card-text'>${response.price} Euros</p>` +
-                `<img width='40' height='30' alt='furniture' src="${response.imageUrl}">` +
-                `<button onclick="ajoutPanier('${response._id}','${response.imageUrl}', '${response.name}', ${response.price})" ,class='btn btn-dark'>Ajouter au panier</button>` +
+                `<button onclick="ajoutPanier('${response._id}','${response.imageUrl}', '${response.name}', ${response.price})" class='btn btn-dark'>Ajouter au panier</button>` +
                 "</div>" +
                 "</div>" +
                 "</div>" +

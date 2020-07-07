@@ -15,11 +15,12 @@ window.onload = function ()
                 "<div class='row justify-content-center'>" +
                     "<div class='col-12 col-lg-6'>" +
                         "<div class='card my-5'>" +
-                            "<div class='card-body'>" +
+                        "<img class='rounded mx-auto d-block' width='200' height='200' alt='vintage chair' src='"+ response[i].imageUrl + "'>" +
+                            "<div class='card-body text-center'>" +
                                 "<h2 class='card-title'>"+ response[i].name +"</h2>" +
                                 "<p class='card-text'>"+ response[i].price +" Euros</p>" + 
-                                "<img width='40' height='30' alt='vintage chair' src='"+ response[i].imageUrl + "'>" +
-                                "<a href='pages/product.html?id="+response[i]._id+"' class='btn btn-dark'>Voir le détail du produit 1</a>" +
+                                "<a href='pages/product.html?id="+response[i]._id +
+                                "' class='btn btn-dark'>Voir le détail du produit 1</a>" +
                             "</div>" +
                          "</div>" +
                     "</div>" +
