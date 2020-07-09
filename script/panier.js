@@ -12,11 +12,9 @@ window.onload = function ()
         `<tr>` + 
         `<td><img src='${panier[i].imageUrl}' alt='' width="100" "height="100"></td>` + 
         `<td>${panier[i].name}</td>` + 
-        `<td>${panier[i].price} euros</td>` +
+        `<td>${panier[i].price} euros</td>` + `<td></td>` + 
         `</tr>`;
         totalPanier += panier[i].price;
-
-        
     }
 
     element.innerHTML +=
@@ -24,7 +22,7 @@ window.onload = function ()
 
         form.innerHTML = 
         `<h2 class="row my-5">Vos informations</h2>
-        <form>
+        <form id="contact">
             <div class="row">
                 <div class="col">
                     <input type="text" class="form-control" placeholder="Prénom">
@@ -53,13 +51,21 @@ window.onload = function ()
             </div>
             <div class="row my-4">
                 <div class="col">
-                    <button type="button" class="btn btn-dark btn-lg btn-block">Commander !</button>
+                    <button type="submit" class="btn btn-dark btn-lg btn-block">Commander !</button>
                 </div>
             </div>
         </form>
-    </div>`
+    </div>`;
+
+    document.getElementById("contact").addEventListener("submit", (event) => {
+        event.preventDefault();
+        console.log("yolo");
+    });
+
 }
-    
+
+
+
 
 //ouverture et envoi requête POST
 /*

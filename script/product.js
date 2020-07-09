@@ -39,8 +39,7 @@ window.onload = function () {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             let response = JSON.parse(this.responseText);
             let element = document.getElementById("product");
-            //let varnish = varnish;
-            //let badge = document.getElementById("affichageBadge");
+            
 
             element.innerHTML =
                 "<div class='row justify-content-center'>" +
@@ -50,15 +49,19 @@ window.onload = function () {
                 `<h2 class='card-title'>${response.name}</h2>` + `<img width='100' height='100' alt='furniture' src="${response.imageUrl}">` + 
                 `<p class='card-text'>${response.description}</p>`+
                 `<label><em>Sélectionnez votre finition</em></label>
-                    <select class="form-control">
-                      <option>${response.varnish}</option>
-                    </select>` +
+                    <select class="form-control"></select>` +
                 `<p class='card-text my-2'>${response.price} Euros</p>` +
                 `<button onclick="ajoutPanier('${response._id}','${response.imageUrl}', '${response.name}', ${response.price})" class='btn btn-dark'>Ajouter au panier</button>` +
                 "</div>" +
                 "</div>" +
                 "</div>" +
                 "</div>";
+
+            let select = document.getElementsByTagName("select")[0];
+
+            response.varnish.forEach(item => {
+                select.innerHTML += `<option value="${item}">${item}</option>`
+           });
 
             //badge.text
         }
