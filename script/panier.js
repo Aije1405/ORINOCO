@@ -5,16 +5,19 @@ window.onload = function ()
     let totalPanier = 0;
     let form = document.getElementById("formContact");
     
+
+    
     for (let i = 0; i < panier.length; i++){
         element.innerHTML +=
         `<tr>` + 
         `<td><img src='${panier[i].imageUrl}' alt='' width="100" "height="100"></td>` + 
         `<td>${panier[i].name}</td>` + 
-        `<td>${panier[i].price} euros</td>` + `<td></td>` + 
+        `<td>${panier[i].price} euros</td>` + `<td><button id="remove" type="button" class="btn btn-danger">Supprimer</button></td>` + 
         `</tr>`;
         totalPanier += panier[i].price;
     }
 
+       
     element.innerHTML +=
         `<th>TOTAL TTC</th>` + `<th></th>` + `<th>${totalPanier} Euros</th>`;
 
@@ -23,28 +26,28 @@ window.onload = function ()
         <form id="formulaire">
             <div class="row">
                 <div class="col">
-                    <input id="prenom" type="text" class="form-control" placeholder="Prénom">
+                    <input id="prenom" type="text" class="form-control" placeholder="Prénom" required>
                 </div>
                 <div class="col">
-                    <input id="nom" type="text" class="form-control" placeholder="Nom">
+                    <input id="nom" type="text" class="form-control" placeholder="Nom" required>
                 </div>
             </div>
             <div class="row my-4">
                 <div class="col">
-                    <input id="adresse" type="text" class="form-control" placeholder="Adresse">
+                    <input id="adresse" type="text" class="form-control" placeholder="Adresse" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="codepostal" type="text" class="form-control" placeholder="Code Postal">
+                    <input id="codepostal" type="text" class="form-control" placeholder="Code Postal" required>
                 </div>
                 <div class="col">
-                    <input id="ville" type="text" class="form-control" placeholder="Ville">
+                    <input id="ville" type="text" class="form-control" placeholder="Ville" required>
                 </div>
             </div>
             <div class="row my-4">
                 <div class="col">
-                    <input id="email" type="email" class="form-control" placeholder="Adresse électronique">
+                    <input id="email" type="email" class="form-control" placeholder="Adresse électronique" required>
                 </div>
             </div>
             <div class="row my-4">
@@ -55,6 +58,7 @@ window.onload = function ()
         </form>
     </div>`;
 
+  
     document.getElementById("formulaire").addEventListener("submit", (event) => {
         event.preventDefault();
     
@@ -68,6 +72,29 @@ window.onload = function ()
         }
         //console.log(contact);
 
+        checkForm = () => {
+            //Controle Regex
+            let checkChiffres = /[0-9]/;
+            let checkMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            let checkCaracteresSpeciaux = /[§!@#$%^&*().?":{}|<>]/;
+            let checkMessage = "";
+
+            if (
+                checkChiffres.test(nom) == true ||
+                checkCaracteresSpeciaux.test(nom) == true ||
+                nom == ""
+              ) {
+                checkMessage = "Veuillez vérifier les informations concernant votre nom. Les caractères spéciaux ou les chiffres ne sont pas autorisés";
+              } else {
+                console.log("Nom accepté");
+              }
+              if (checkMessage != "") {
+                alert("Attention certaines données ne sont pas conformes :" + "\n" + checkMessage);
+                console.log(alert)
+              }
+            }
+          
+
         //parcourir le tableau panier et récupérer les attributs id pour en faire un tableau
         let products = [];
         panier.forEach(item => {
@@ -79,7 +106,7 @@ window.onload = function ()
            contact, products
        };
        JSON.stringify(send);
-       console.log(send);
+       //console.log(send);
       
         const REQUEST = new XMLHttpRequest();
         REQUEST.open("POST", "http://localhost:3000/api/furniture/order");
@@ -100,3 +127,14 @@ window.onload = function ()
         
     });
 }
+let remove = 0;
+removeItem = (i) => {
+    panier.splice(i, 1);
+     localStorage.clear();
+     // Mise à jour du nouveau panier avec suppression de l'article
+     localStorage.setItem("panier", JSON.stringify(panier));
+     //Mise à jour de la page pour affichage de la suppression au client
+     window.location.reload();
+     remove.addEventListener("click", (event) => {this.removeItem(i);})
+   };  
+   

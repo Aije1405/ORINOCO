@@ -60,13 +60,6 @@ window.onload = function () {
         }
     }
 
-    //Afficher le nombre d'articles dans le panier sur le badge
-    /*const affichageBadge = document.getElementById("affichageBadge");
-    ajoutPanier.addEventListener("click", event =>{
-        affichageBadge.innerHTML = `Click count: ${event.detail}`;
-        console.log(affichageBadge)
-    });*/
-
     const QUERYSTRING = window.location.search;
 
     const URLPARAMETERS = new URLSearchParams(QUERYSTRING);
