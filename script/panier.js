@@ -5,8 +5,6 @@ window.onload = function ()
     let totalPanier = 0;
     let form = document.getElementById("formContact");
     
-
-
     for (let i = 0; i < panier.length; i++){
         element.innerHTML +=
         `<tr>` + 
@@ -22,7 +20,7 @@ window.onload = function ()
 
         form.innerHTML = 
         `<h2 class="row my-5">Vos informations</h2>
-        <form id="contact">
+        <form id="formulaire">
             <div class="row">
                 <div class="col">
                     <input id="prenom" type="text" class="form-control" placeholder="Prénom">
@@ -57,11 +55,10 @@ window.onload = function ()
         </form>
     </div>`;
 
-    document.getElementById("contact").addEventListener("submit", (event) => {
+    document.getElementById("formulaire").addEventListener("submit", (event) => {
         event.preventDefault();
     
-
-        const User = {
+        let contact = {
             prenom: document.getElementById("prenom").value,
             nom: document.getElementById("nom").value,
             adresse: document.getElementById("adresse").value,
@@ -69,29 +66,37 @@ window.onload = function ()
             ville: document.getElementById("ville").value,
             email: document.getElementById("email").value,
         }
-        //console.log(User);
+        //console.log(contact);
 
+        //parcourir le tableau panier et récupérer les attributs id pour en faire un tableau
+        let products = [];
+        panier.forEach(item => {
+           products.push(item.id)
+           //console.log(products);
+       });
+
+       let send = {
+           contact, products
+       };
+       JSON.stringify(send);
+       console.log(send);
+      
         const REQUEST = new XMLHttpRequest();
-        let METHODE = "POST";
-        let URL = "http://localhost:3000/api/furniture/order";
-
-        REQUEST.open(METHODE, URL);
+        REQUEST.open("POST", "http://localhost:3000/api/furniture/order");
+        REQUEST.setRequestHeader("content-type", "application/JSON");
+        REQUEST.send(JSON.stringify(send));
+        
 
         REQUEST.onreadystatechange = function(event){  //récupérer la réponse readyStateChange
             if(this.readyState === XMLHttpRequest.DONE){ //est-ce que ma requête est terminée ?
-                if(this.status === 201){  //est-ce que ma requête s'est bien passée ?(réponse 201 le post est-il accepté ?)
+                if(this.status === 201){//est-ce que ma requête s'est bien passée ?(réponse 201 le post est-il accepté ?)
+                    let json = JSON.parse(REQUEST.responseText); 
                     console.log(JSON.parse(this.responseText)) //JSON.parse affiche les données sous forme d'objets
                 } else {
-                    console.log("Statut" + this.status);
+                    console.log(this.responseText);
                 }
             } 
         }
-        REQUEST.send(User, panier);
+        
     });
-    
 }
-
-
-
-
-

@@ -6,7 +6,7 @@ function callApi(request, ID) {
 //Ajout Panier
 function ajoutPanier(id, imageUrl, name, price) {
     let panier = JSON.parse(localStorage.getItem("panier")); //
-    console.log(panier);
+    //console.log(panier);
     if (panier === null) { //je vérifie si mon panier existe
         panier = [];
     }
@@ -25,11 +25,6 @@ function ajoutPanier(id, imageUrl, name, price) {
 function Message(){
    alert("Votre article a bien été ajouté au panier");
    console.log(alert);
-}
-
-//Afficher le nombre d'articles dans le panier
-function affichageBadge(){
-
 }
 
 window.onload = function () {
@@ -62,13 +57,15 @@ window.onload = function () {
             response.varnish.forEach(item => {
                 select.innerHTML += `<option value="${item}">${item}</option>`
            });
-
-            //badge.text
         }
-
-        
-
     }
+
+    //Afficher le nombre d'articles dans le panier sur le badge
+    /*const affichageBadge = document.getElementById("affichageBadge");
+    ajoutPanier.addEventListener("click", event =>{
+        affichageBadge.innerHTML = `Click count: ${event.detail}`;
+        console.log(affichageBadge)
+    });*/
 
     const QUERYSTRING = window.location.search;
 
@@ -77,5 +74,3 @@ window.onload = function () {
 
     callApi(request, ID);
 }
-
-
