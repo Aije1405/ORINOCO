@@ -12,7 +12,7 @@ window.onload = function ()
         `<tr>` + 
         `<td><img src='${panier[i].imageUrl}' alt='' width="100" "height="100"></td>` + 
         `<td>${panier[i].name}</td>` + 
-        `<td>${panier[i].price} euros</td>` + `<td><button id="remove" type="button" class="btn btn-danger">Supprimer</button></td>` + 
+        `<td>${panier[i].price} euros</td>` + `<td><button onclick="removeItem" type="button" class="btn btn-outline-danger">Supprimer</button></td>` + 
         `</tr>`;
         totalPanier += panier[i].price;
     }
@@ -52,7 +52,7 @@ window.onload = function ()
             </div>
             <div class="row my-4">
                 <div class="col">
-                    <button type="submit" class="btn btn-dark btn-lg btn-block">Commander !</button>
+                    <button type="submit" class="btn btn-success btn-lg btn-block">Commander !</button>
                 </div>
             </div>
         </form>
@@ -84,13 +84,12 @@ window.onload = function ()
                 checkCaracteresSpeciaux.test(nom) == true ||
                 nom == ""
               ) {
-                checkMessage = "Veuillez vérifier les informations concernant votre nom. Les caractères spéciaux ou les chiffres ne sont pas autorisés";
+                checkMessage = "Les caractères spéciaux ou les chiffres ne sont pas autorisés";
               } else {
                 console.log("Nom accepté");
               }
               if (checkMessage != "") {
                 alert("Attention certaines données ne sont pas conformes :" + "\n" + checkMessage);
-                console.log(alert)
               }
             }
           
@@ -106,7 +105,7 @@ window.onload = function ()
            contact, products
        };
        JSON.stringify(send);
-       //console.log(send);
+       console.log(send);
       
         const REQUEST = new XMLHttpRequest();
         REQUEST.open("POST", "http://localhost:3000/api/furniture/order");
@@ -127,14 +126,17 @@ window.onload = function ()
         
     });
 }
-let remove = 0;
-removeItem = (i) => {
-    panier.splice(i, 1);
-     localStorage.clear();
-     // Mise à jour du nouveau panier avec suppression de l'article
-     localStorage.setItem("panier", JSON.stringify(panier));
-     //Mise à jour de la page pour affichage de la suppression au client
-     window.location.reload();
-     remove.addEventListener("click", (event) => {this.removeItem(i);})
-   };  
-   
+
+//retirer un item du panier
+let removeItem = 0
+removeItem.addEventListener("onclick",(event) =>{
+    panier.splice(0, 1);
+    localStorage.clear();
+    // Mise à jour du nouveau panier avec suppression de l'article
+    localStorage.setItem("panier", JSON.stringify(panier));
+    //Mise à jour de la page pour affichage de la suppression au client
+    window.location.reload();
+});  
+
+
+       
