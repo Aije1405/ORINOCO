@@ -121,14 +121,15 @@ window.onload = function ()
             .then(response => response.json()) //récupère la promesse
             .then(response => {
                 localStorage.removeItem("panier");
-                window.location.replace("/pages/confirmation.html");
-                console.log(response)  
+                localStorage.setItem("orderId", response.orderId);  
+                window.location.replace("/pages/confirmation.html")
+                
             }) //récupère la réponse de la promesse
             .catch(err => console.error(err)); //vérifie s'il y a une erreur
             
     });
-
-
+    
+    
 }
 
 //retirer un item du panier
