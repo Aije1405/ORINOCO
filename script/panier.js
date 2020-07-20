@@ -17,6 +17,7 @@ window.onload = function ()
         totalPanier += panier[i].price;
     }
 
+    localStorage.setItem("total", totalPanier);
        
     element.innerHTML +=
         `<th>TOTAL TTC</th>` + `<th></th>` + `<th>${totalPanier} Euros</th>`;
@@ -26,27 +27,33 @@ window.onload = function ()
         <form id="formulaire">
             <div class="row">
                 <div class="col">
+                <label for="prenom">Prenom</label>
                     <input id="prenom" type="text" class="form-control" placeholder="Prénom" required>
                 </div>
                 <div class="col">
+                <label for="nom">Nom</label>
                     <input id="nom" type="text" class="form-control" placeholder="Nom" required>
                 </div>
             </div>
             <div class="row my-4">
                 <div class="col">
+                <label for="adresse">Adresse</label>
                     <input id="adresse" type="text" class="form-control" placeholder="Adresse" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
+                <label for="codepostal">Code Postal</label>
                     <input id="codepostal" type="text" class="form-control" placeholder="Code Postal" required>
                 </div>
                 <div class="col">
+                <label for="ville">Ville</label>
                     <input id="ville" type="text" class="form-control" placeholder="Ville" required>
                 </div>
             </div>
             <div class="row my-4">
                 <div class="col">
+                <label for="email">Email</label>
                     <input id="email" type="email" class="form-control" placeholder="Adresse électronique" required>
                 </div>
             </div>
@@ -100,8 +107,6 @@ window.onload = function ()
         const send = {
             contact, products
         };
-        
-        console.log(JSON.stringify(send));
 
         const options = {
             method: 'POST',
@@ -113,11 +118,17 @@ window.onload = function ()
 
         // send post request
         fetch('http://localhost:3000/api/furniture/order', options)
-            .then(res => res.json())
-            .then(res => console.log(res))
-            .catch(err => console.error(err));
-                
+            .then(response => response.json()) //récupère la promesse
+            .then(response => {
+                localStorage.removeItem("panier");
+                window.location.replace("/pages/confirmation.html");
+                console.log(response)  
+            }) //récupère la réponse de la promesse
+            .catch(err => console.error(err)); //vérifie s'il y a une erreur
+            
     });
+
+
 }
 
 //retirer un item du panier
