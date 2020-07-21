@@ -39,3 +39,10 @@ window.onload = function ()
 //const number = 123456.789;
 //console.log(new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(number));
 // expected output: "123.456,79 €"
+/*
+var prixDeLEssence = new Intl.NumberFormat("en-US",
+                        { style: "currency", currency: "USD",
+                          minimumFractionDigits: 3 });
+ 
+console.log(prixDeLEssence.format(5.259)); // $5.259
+*/

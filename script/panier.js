@@ -1,28 +1,27 @@
-window.onload = function () 
-{
-    let panier = JSON.parse(localStorage.getItem("panier"));
-    let element = document.getElementById("affichePanier");
+window.onload = function () {
+    let panier = JSON.parse(localStorage.getItem("panier")); //appel du panier
+    let element = document.getElementById("affichePanier"); //appel affichage du panier
     let totalPanier = 0;
-    let form = document.getElementById("formContact");
-    
+    let form = document.getElementById("formContact");//appel affichage de contact
 
-    
-    for (let i = 0; i < panier.length; i++){
+
+    //affichage panier et total
+    for (let i = 0; i < panier.length; i++) {
         element.innerHTML +=
-        `<tr>` + 
-        `<td><img src='${panier[i].imageUrl}' alt='' width="100" "height="100"></td>` + 
-        `<td>${panier[i].name}</td>` + 
-        `<td>${panier[i].price} euros</td>` + `<td><button onclick="removeItem" type="button" class="btn btn-outline-danger">Supprimer</button></td>` + 
-        `</tr>`;
+            `<tr>` +
+            `<td><img src='${panier[i].imageUrl}' alt='' width="100" "height="100"></td>` +
+            `<td>${panier[i].name}</td>` +
+            `<td>${panier[i].price} euros</td>` + `<td><button onclick="" type="button" class="btn btn-outline-danger">Supprimer</button></td>` +
+            `</tr>`;
         totalPanier += panier[i].price;
     }
 
     localStorage.setItem("total", totalPanier);
-       
+
     element.innerHTML +=
         `<th>TOTAL TTC</th>` + `<th></th>` + `<th>${totalPanier} Euros</th>`;
 
-        form.innerHTML = 
+    form.innerHTML =
         `<h2 class="row my-5">Vos informations</h2>
         <form id="formulaire">
             <div class="row">
@@ -65,10 +64,10 @@ window.onload = function ()
         </form>
     </div>`;
 
-  
+
     document.getElementById("formulaire").addEventListener("submit", (event) => {
         event.preventDefault();
-    
+        //object contact
         let contact = {
             firstName: document.getElementById("prenom").value,
             lastName: document.getElementById("nom").value,
@@ -89,7 +88,7 @@ window.onload = function ()
                 checkChiffres.test(nom) == true ||
                 checkCaracteresSpeciaux.test(nom) == true ||
                 nom == ""
-              ) {
+            ) {
                 checkMessage = "Les caractères spéciaux ou les chiffres ne sont pas autorisés";
             } else {
                 console.log("Nom accepté");
@@ -98,8 +97,9 @@ window.onload = function ()
             if (checkMessage != "") {
                 alert("Attention certaines données ne sont pas conformes :" + "\n" + checkMessage);
             }
+            
         }
-          
+
 
         //parcourir le tableau panier et récupérer les attributs id pour en faire un tableau
         const products = panier.map(item => item.id)
@@ -116,20 +116,16 @@ window.onload = function ()
             }
         }
 
-        // send post request
+        // envoi request post 
         fetch('http://localhost:3000/api/furniture/order', options)
-            .then(response => response.json()) //récupère la promesse
+            .then(response => response.json()) //récupère la promesse puis la réponse de la promesse
             .then(response => {
-                localStorage.removeItem("panier");
-                localStorage.setItem("orderId", response.orderId);  
-                window.location.replace("/pages/confirmation.html")
-                
-            }) //récupère la réponse de la promesse
-            .catch(err => console.error(err)); //vérifie s'il y a une erreur
-            
+                //localStorage.removeItem("panier");
+                localStorage.setItem("orderId", response.orderId);
+                //window.location.replace("./confirmation.html")
+            })
+            .catch(err => console.error(err)); //vérifie s'il y a une erreur  
     });
-    
-    
 }
 
 //retirer un item du panier
@@ -144,4 +140,4 @@ window.onload = function ()
 // });  
 
 
-       
+
