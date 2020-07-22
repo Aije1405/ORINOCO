@@ -1,5 +1,8 @@
+import {API_URL} from "../modules/env.mjs"
+
 window.onload = function () 
 {
+    
     let request = new XMLHttpRequest();
 
     request.onreadystatechange = function () 
@@ -30,7 +33,7 @@ window.onload = function ()
 
     }
 
-    request.open("GET", "http://localhost:3000/api/furniture");
+    request.open("GET", API_URL);
     request.send();
 
 
