@@ -1,3 +1,5 @@
+import {API_URL} from "../modules/env.mjs"
+
 window.onload = function () {
     let panier = JSON.parse(localStorage.getItem("panier")); //appel du panier
     let element = document.getElementById("affichePanier"); //appel affichage du panier
@@ -64,9 +66,30 @@ window.onload = function () {
         </form>
     </div>`;
 
+    const checktext = (text,email = false) => {
+        const checkChiffres = /[0-9]/;
+        const checkMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const checkCaracteresSpeciaux = /[§!@#$%^&*().?":{}|<>]/;
+
+        if(email){
+            checkMail.test(text) ? console.log("Email accepté") : alert("Attention certaines données ne sont pas conformes");
+            return 
+        }
+
+        if (checkChiffres.test(text) || checkCaracteresSpeciaux.test(text) ) {
+            alert("Attention certaines données ne sont pas conformes");
+            return
+        } 
+    }
 
     document.getElementById("formulaire").addEventListener("submit", (event) => {
         event.preventDefault();
+
+        checktext(nom.value)
+        checktext(prenom.value)
+        checktext(email.value, true)
+        //bloquer la suite de l'éxécution du code si les tests ne passent pas
+
         //object contact
         let contact = {
             firstName: document.getElementById("prenom").value,
@@ -75,30 +98,7 @@ window.onload = function () {
             city: document.getElementById("ville").value,
             email: document.getElementById("email").value,
         }
-        //console.log(contact);
-
-        checkForm = () => {
-            //Controle Regex
-            let checkChiffres = /[0-9]/;
-            let checkMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            let checkCaracteresSpeciaux = /[§!@#$%^&*().?":{}|<>]/;
-            let checkMessage = "";
-
-            if (
-                checkChiffres.test(nom) == true ||
-                checkCaracteresSpeciaux.test(nom) == true ||
-                nom == ""
-            ) {
-                checkMessage = "Les caractères spéciaux ou les chiffres ne sont pas autorisés";
-            } else {
-                console.log("Nom accepté");
-            }
-
-            if (checkMessage != "") {
-                alert("Attention certaines données ne sont pas conformes :" + "\n" + checkMessage);
-            }
-            
-        }
+        console.log(contact);
 
 
         //parcourir le tableau panier et récupérer les attributs id pour en faire un tableau
@@ -117,7 +117,7 @@ window.onload = function () {
         }
 
         // envoi request post 
-        fetch('http://localhost:3000/api/furniture/order', options)
+        fetch(API_URL + "order", options)
             .then(response => response.json()) //récupère la promesse puis la réponse de la promesse
             .then(response => {
                 //localStorage.removeItem("panier");
