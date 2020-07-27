@@ -1,5 +1,6 @@
 import {API_URL} from "../modules/env.mjs"
 
+//affichage du produit cliqué par l'utilisateur
 function generateProduct(response){
     let element = document.getElementById("product");
 
@@ -36,20 +37,14 @@ function generateProduct(response){
 }
 
 window.onload = function () {
-    let request = new XMLHttpRequest();
-    request.onreadystatechange = function () {
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            let response = JSON.parse(this.responseText);
-            generateProduct(response);
-            
-        }
-    }
-
     const QUERYSTRING = window.location.search;
-
     const URLPARAMETERS = new URLSearchParams(QUERYSTRING);
     const ID = URLPARAMETERS.get('id');
 
-    request.open("GET", API_URL + ID);
-    request.send();
+    fetch(API_URL + ID)
+                .then(response => response.json()) //récupère la promesse puis la réponse de la promesse - conversion JSON
+                .then(response => {
+                    generateProduct(response);   
+                })
+                .catch(err => console.error(err)); //vérifie s'il y a une erreur 
 }

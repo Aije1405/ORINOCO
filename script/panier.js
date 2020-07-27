@@ -19,6 +19,7 @@ window.onload = function () {
             totalPanier += panier[i].price;
         }
 
+        //local storage pour l'affichage du total du panier sur la page de confirmation
         localStorage.setItem("total", totalPanier);
 
         let form = document.getElementById("formContact");//appel affichage de contact
@@ -68,7 +69,7 @@ window.onload = function () {
 
         //vérification des inputs 
         const checktext = (text,email = false) => {
-            const checkChiffres = /[0-9]/;
+            //const checkChiffres = /[0-9]/;
             const checkMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             const checkCaracteresSpeciaux = /[§!@#$%^&*().?":{}|<>]/;
 
@@ -76,8 +77,7 @@ window.onload = function () {
                 checkMail.test(text) ? console.log("Email accepté") : alert("Attention certaines données ne sont pas conformes");
                 return 
             }
-
-            if (checkChiffres.test(text) || checkCaracteresSpeciaux.test(text) ) {
+            if (checkCaracteresSpeciaux.test(text) ) {
                 alert("Attention certaines données ne sont pas conformes");
                 return
             } 
@@ -89,6 +89,9 @@ window.onload = function () {
             checktext(nom.value)
             checktext(prenom.value)
             checktext(email.value, true)
+            checktext(ville.value)
+            checktext(adresse.value)
+            checktext(codepostal.value)
             //bloquer la suite de l'éxécution du code si les tests ne passent pas ?
 
             //création de l'object contact
@@ -119,10 +122,10 @@ window.onload = function () {
 
             // envoi de la requête post en fetch asynchrone - paramètres URL (renvoi une promesse)
             fetch(API_URL + "order", options)
-                .then(response => response.json()) //récupère la promesse puis la réponse de la promesse - conversion JSON
+                .then(response => response.json()) //récupère la promesse puis la réponse promise - conversion JSON
                 .then(response => {
                     localStorage.removeItem("panier");
-                    localStorage.setItem("orderId", response.orderId);
+                    localStorage.setItem("orderId", response.orderId); 
                     window.location.replace("./confirmation.html")
                 })
                 .catch(err => console.error(err)); //vérifie s'il y a une erreur  
@@ -132,8 +135,9 @@ window.onload = function () {
     
 }
 
+//retirer un item du panier
 window.addEventListener("load", function(event) {
-    
+    //création du bouton de suppression
     for(let i=0; i<panier.length; i++){
         let button = document.createElement("button")
         const id = "#btn-" + i
@@ -152,15 +156,6 @@ window.addEventListener("load", function(event) {
 });
 
 
-//retirer un item du panier
 
-/*
-    
-//Mise à jour du nouveau panier avec suppression de l'article
-localStorage.setItem("panier", JSON.stringify(panier));
-//Mise à jour de la page pour affichage de la suppression au client
-window.location.reload();
-});  
-*/
 
 
