@@ -10,7 +10,7 @@ function generateProduct(response) {
         `<p class='card-text'>${response.description}</p>` +
         `<label><em>Sélectionnez votre finition</em></label>
             <select class="form-control"></select>` +
-        `<p class='card-text my-2'>${response.price} Euros</p>`);
+        `<p class='card-text my-2'>${new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(response.price)} </p>`);
 
     let select = document.getElementsByTagName("select")[0];
 
@@ -34,7 +34,7 @@ window.onload = function () {
 }
 
 //Ajouter le produit au panier
-document.getElementById("ajout").addEventListener("click", function generateProduct(response) {
+document.getElementById("ajout").addEventListener("click", () => {
     let panier = JSON.parse(localStorage.getItem("panier"));
     if (panier === null) { //je vérifie si mon panier existe
         panier = [];
@@ -47,7 +47,6 @@ document.getElementById("ajout").addEventListener("click", function generateProd
     });
     localStorage.setItem("panier", JSON.stringify(panier)); //les paramètres ne peuvent être que des strings donc JSON
     alert("Votre article a bien été ajouté au panier");
-    console.log(panier)
 })
 
 

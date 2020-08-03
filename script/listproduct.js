@@ -16,7 +16,7 @@ window.onload = function () {
                     response[i].imageUrl + "'>" +
                     "<div class='card-body text-center'>" +
                     "<h2 class='card-title'>" + response[i].name + "</h2>" +
-                    "<p class='card-text'>" + response[i].price + " Euros</p>" +
+                    "<p class='card-text'>" + new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(response[i].price) + "</p>" +
                     "<a href='pages/product.html?id=" + response[i]._id +
                     "' class='btn btn-dark'>Voir le détail du produit</a>" +
                     "</div>" +
