@@ -17,7 +17,7 @@ function generateProduct(response) {
         select.innerHTML += `<option value="${item}">${item}</option>`
     });
 }
-
+let productInfos;
 //Appeler l'API et afficher le produit cliqué par l'utilisateur en utilisant son id
 window.onload = function () {
     const QUERYSTRING = window.location.search;
@@ -27,6 +27,7 @@ window.onload = function () {
         .then(response => response.json()) //récupère la promesse puis la réponse de la promesse - conversion JSON
         .then(response => {
             generateProduct(response);
+            productInfos = response;
         })
         .catch(err => console.error(err)); //vérifie s'il y a une erreur 
 }
@@ -38,10 +39,10 @@ document.getElementById("ajout").addEventListener("click", function generateProd
         panier = [];
     }
     panier.push({
-        id: response._id,
-        imageUrl: response.imageUrl,
-        name: response.name,
-        price: response.price
+        id: productInfos._id,
+        imageUrl: productInfos.imageUrl,
+        name: productInfos.name,
+        price: productInfos.price
     });
     localStorage.setItem("panier", JSON.stringify(panier)); //les paramètres ne peuvent être que des strings donc JSON
     alert("Votre article a bien été ajouté au panier");
