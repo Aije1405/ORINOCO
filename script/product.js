@@ -1,3 +1,4 @@
+//Import de l'url de l'API
 import { API_URL } from "../modules/env.mjs"
 
 //Générer le détail du produit cliqué par l'utilisateur
@@ -18,7 +19,7 @@ function generateProduct(response) {
     });
 }
 let productInfos;
-//Appeler l'API et afficher le produit cliqué par l'utilisateur en utilisant son id
+//Utilisation nouvelle URL de l'API avec id du produit cliqué
 window.onload = function () {
     const QUERYSTRING = window.location.search;
     const URLPARAMETERS = new URLSearchParams(QUERYSTRING);

@@ -1,10 +1,11 @@
-import {API_URL} from "../modules/env.mjs"; //import des informations de l'API
-let panier = JSON.parse(localStorage.getItem("panier")); //Récupérer le panier créé à la page précédente
+//Import de l'url de l'API
+import {API_URL} from "../modules/env.mjs"; 
 
+let panier = JSON.parse(localStorage.getItem("panier")); //Récupérer le panier créé à la page précédente
+//Générer le panier et le formulaire (seulement s'il y a un panier)
 function generateCart(cart) {
     let element = document.getElementById("affichePanier"); //appel affichage du panier
 	let totalPanier = 0;
-
 	//affichage panier et total
 	if(cart && cart.length > 0){
 	
@@ -17,7 +18,6 @@ function generateCart(cart) {
 				`</tr>`;
 			totalPanier += cart[i].price;				
 		}
-		
 		element.innerHTML += `<th>TOTAL TTC</th>` + `<th></th>` + `<th>${totalPanier} Euros</th>`;
 		//local storage pour l'affichage du total du panier sur la page de confirmation
 		localStorage.setItem("total", totalPanier);  
@@ -34,7 +34,6 @@ function clickOnDelete(i) {
 }
 
 window.addEventListener("load", function(event) {
-    //création du bouton de suppression
     for(let i=0; i<panier.length; i++){
         document.getElementById("btn-" + i).addEventListener('click', ()=> {clickOnDelete(i)})
     }
@@ -100,7 +99,7 @@ function generateForm(){
 		</form>`;
 }
 
-//Vérification des inputs 
+//Vérification des inputs du formulaire
 document.getElementById("formulaire").addEventListener("submit", (event) => {
     event.preventDefault();
 	let ok = true;
@@ -110,7 +109,7 @@ document.getElementById("formulaire").addEventListener("submit", (event) => {
     if(checktext(ville.value, false)===false){ok = false}
     if(checktext(adresse.value, false)===false){ok = false}
     if(checktext(codepostal.value, false)===false){ok = false}
-    //bloquer la suite de l'éxécution du code si les tests ne passent pas 
+    //bloquer la suite de l'éxécution du code si les vérifications ne donnent pas de résultats conformes
     if(ok === true){
 	let contact = {
         firstName: document.getElementById("prenom").value,
@@ -119,7 +118,7 @@ document.getElementById("formulaire").addEventListener("submit", (event) => {
         city: document.getElementById("ville").value,
         email: document.getElementById("email").value,
     }
-    //création de l'object contact
+    //envoi de l'object contact si les vérifications donnent des résultats conformes
     sendOrder(contact);
     }
 });

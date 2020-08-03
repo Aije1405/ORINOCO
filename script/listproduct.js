@@ -1,3 +1,4 @@
+//Import de l'url de l'API
 import { API_URL } from "../modules/env.mjs"
 //Appel à l'API et affichage des produits
 window.onload = function () {
